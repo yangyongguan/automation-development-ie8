@@ -161,13 +161,15 @@ innput.txt{
 ```
 #### 11、布局错位问题:
 a、没有清除浮动的清除浮动即可,如：
-```javascript
 html:
+```javascript
 <div class="parent clear">
   <div class="child">child1</div>
   <div class="child">child2</div>
 </div>
+```
 css:
+```css
 .clear{
   overflow: hidden;
   *zoom:1;
@@ -182,20 +184,21 @@ css:
 #### 13、ul元素中li 两端顶头，间距均等问题：
 li使用float为left，加上margin-left,
 然后ul同时也加上margin-left，其值使用与li相对应的负值,如：
-```javascript
 html:
+```javascript
 <ul class="parent">
   <li class="child">测试</li>
   <li class="child">测试</li>
   <li class="child">测试</li>
   <li class="child">测试</li>
 </ul>
+```
+```css
 css:
 .parent{
   width 1200px;
-  margin:0 auto;
-  *zoom:1;
   margin-left: -20px;
+  *zoom:1;
 }
 .parent .child{
   width 280px;
