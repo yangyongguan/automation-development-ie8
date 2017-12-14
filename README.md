@@ -13,12 +13,13 @@ $ cd automation-development-ie8
 
 $ npm install
 
-
 $ npm run dev //用于开发环境
 
-
 $ npm run build //用于生产环境
+
 ```
+浏览器输入地址查看模板：http://localhost:3000/html/index/
+
 
 ### 项目目录结构
 
@@ -127,7 +128,7 @@ function setKeyItem(key,value) {
 ```
 #### 7、“JSON”未定义
 引入json2.js
-<span style="color:red;">注：本模板已经引入</span>
+注：本模板已经引入
 下载地址：https://github.com/douglascrockford/JSON-js
 
 #### 8、IE跨域下出现{"readyState":0,"status":0,"TypeError"...}
