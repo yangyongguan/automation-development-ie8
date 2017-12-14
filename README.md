@@ -75,11 +75,59 @@ $ npm run build //用于生产环境
    > 如果需求不能满足您也可以在npm的网站上找到相应插件的gulp配置写法
 
 ### IE低版本兼容小贴士
+#### IE浏览器hack
+html:
+```html
+<!--[if IE]>
+这段文字只在IE浏览器显示
+<![endif]-->
+
+只在IE6下生效
+<!--[if IE 6]>
+这段文字只在IE6浏览器显示
+<![endif]-->
+
+只在IE6以上版本生效
+<!--[if gte IE 6]>
+这段文字只在IE6以上(包括)版本IE浏览器显示
+<![endif]-->
+
+只在IE8上不生效
+<!--[if ! IE 8]>
+这段文字在非IE8浏览器显示
+<![endif]-->
+
+非IE浏览器生效
+<!--[if !IE]>
+这段文字只在非IE浏览器显示
+<![endif]-->
+```
+css:
+```css
+“-″减号是IE6专有的hack
+“\9″ IE6/IE7/IE8/IE9/IE10都生效
+“\0″ IE8/IE9/IE10都生效，是IE8/9/10的hack
+“\9\0″ 只对IE9/IE10生效，是IE9/10的hack
+.hack{
+/*demo1 注意顺序，否则IE6/7下可能无法正确显示，导致结果显示为白色背景*/
+    background-color:red; /* All browsers */
+    background-color:blue !important;/* All browsers but IE6 */
+    *background-color:black; /* IE6, IE7 */
+    +background-color:yellow;/* IE6, IE7*/
+    background-color:gray\9; /* IE6, IE7, IE8, IE9, IE10 */
+    background-color:purple\0; /* IE8, IE9, IE10 */
+    background-color:orange\9\0;/*IE9, IE10*/
+    _background-color:green; /* Only works in IE6 */
+    *+background-color:pink; /*  WARNING: Only works in IE7 ? Is it right? */
+}
+```
+
 #### 1、IE8及以下，布局问题
 不使用flex，box-size:border-box，calc
 
 #### 2、ie下进行跨域请求解决方案
 jquery.xdomainrequest.min.js
+
 #### 3、ie8,9 进行跨域post请求，参数无法传递解决办法
 jquery的ajax方法添加
 crossDomain: true == !(document.all)
@@ -100,6 +148,7 @@ $.ajax({
     }
 })
 ```
+
 #### 4、IE6,IE7下overflow：hidden无效
 解决办法：position:relative; 或者 *position:relative; /* for IE6,IE7 */ 即可解决该bug。
 既：
@@ -107,6 +156,7 @@ $.ajax({
 position: relative;
 overflow: hidden;
 ```
+
 #### 5、css3选择器兼容问题？
 ```html
 <!- -[if (gte IE 6)&(lte IE 8)]>
@@ -115,6 +165,7 @@ overflow: hidden;
 <![endif]- ->
 ```
 在非必不可得到情况下不建议使用，会引起页面卡顿
+
 #### 6、兼容IE8不直接使用sessionStorage,localStorage
 使用公用方法，使用办法如下：
 ```javascript
@@ -126,6 +177,7 @@ function setKeyItem(key,value) {
     }
 }
 ```
+
 #### 7、“JSON”未定义
 引入json2.js
 注：本模板已经引入
@@ -152,6 +204,7 @@ opacity=80
 -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
 filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
 ```
+
 #### 10、输入框垂直居中问题
 将line-height设置成和height一样 即可,如：
 ```css
@@ -160,6 +213,7 @@ innput.txt{
   line-height: 36px;
 }
 ```
+
 #### 11、布局错位问题:
 a、没有清除浮动的清除浮动即可,如：
 html:
@@ -179,9 +233,11 @@ css:
   float: left;
 }
 ```
+
 #### 12、css伪类问题：
 将用伪类实现的效果换成其他实现方式；
   主要是针对IE7内核，如果不用兼容IE7内核，则不用处理此类问题。
+
 #### 13、ul元素中li 两端顶头，间距均等问题：
 li使用float为left，加上margin-left,
 然后ul同时也加上margin-left，其值使用与li相对应的负值,如：
